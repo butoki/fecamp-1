@@ -72,29 +72,46 @@
 	// 힌트1: 문자열 표시는 console.log와 사용법이 똑같은 log() 함수를 사용해 출력하면 된다.
 	// 힌트2: countDown() 함수는 만들어두기만 하면 자동으로 실행된다.
 	// 사용예: countDown(2015, 3, 26, 13); // 3월 26일 오후 1시까지 남은 시간 표시
-function countDown(y,m,d,s){
-        
-        var dday = new Date(y,m,d,s);
-        var nowdate = new Date();
-        var leftDay = dday.getTime()-nowdate.getTime();
-        var leftDay = new Date();
-        
-        var lefth = leftDay.getHours();
-        var leftm = leftDay.getMinutes();
-        var lefts = leftDay.getSeconds();
-        
-        //var lefth = Math.floor(leftDay/1000/60/60/24);
-        //var leftm = Math.floor(leftDay/1000/60/60);
-        //var lefts = Math.floor(leftDay/1000/60);
-        setTimeout(countDown, 1000);
-        console.log(lefth+'시간'+leftm+'분'+lefts+'초');
-        function log(){
-            return leftDay=lefth+'시간'+leftm+'분'+lefts+'초';
-        };
-        
-    }
-    countDown(2015, 3, 26, 13);
+        /*function countDown(y,m,d,h){
+            var dday = new Date(y,m,d,h);
+            var ddayget = dday.getTime();
+            y = dday.getFullYear();
+            m = dday.getMonth()-1;
+            d = dday.getDate();
+            h = dday.getHours();
+            var nowdate = new Date();
             
+            var leftDay = dday.getTime()-nowdate.getTime();
+            console.log(ddayget);
+            //console.log(nowdate);
+            //console.log(nowdate.getHours());
+            var lefth = h-nowdate.getHours();
+            //var lefth = dday.getHours()-nowdate.getHours();
+            //var lefth = Math.floor(leftDay/1000/60/60); 
+            var leftm = 60-nowdate.getMinutes();
+            //var leftm = Math.floor(leftDay/1000/60);
+            var lefts = 60-nowdate.getSeconds();
+            //var lefts = Math.floor(leftDay/1000);
+
+            //var leftm = Math.floor(시간차/1000/60);
+            //var lefts = Math.floor(시간차/1000);
+            log(lefth+'시간'+leftm+'분'+lefts+'초');
+            //console.log(lefth+'시간'+leftm+'분'+lefts+'초');
+            setTimeout(countDown, 1000);
+            
+        }*/
+        function countDown(연, 월, 일, 시){
+            var 날짜, 현재, 남은밀리초, 남은시, 남은분, 남은초;
+            날짜 = new Date(연,월,일,시);
+            현재 = new Date();
+            남은밀리초 =  날짜-현재;
+            남은초 = Math.floor((남은밀리초/1000) % 60);
+            남은분 = Math.floor((남은밀리초/1000/60) % 60);
+            남은시 = Math.floor((남은밀리초/1000/60/60));
+            log(남은시+'시간'+남은분+'분'남은초+'초');
+            setTimeout(function (){countDown(연, 월, 일, 시);}),1000);
+        }
+        //countDown(2015, 3, 28, 9);
 	</script>
 </head>
 <body>
