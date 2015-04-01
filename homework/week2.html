@@ -37,7 +37,9 @@
     function randomFloat(min, max){
 		var rand = Math.random();
 		rand = rand * (max - min) + min;
-		return Math.round(rand * 10) / 10;//다시확인하기
+        // Math.random() * (max - min) + min;
+		return Math.round(rand * 10) / 10;//소수점을 하나 올리고 나머지를 버린뒤 제자리로 돌려놓음
+        //toPrecision(소수점자리수) string으로 반환
 	}
 	console.log(randomFloat(5, 10));
 	
@@ -51,6 +53,7 @@
         var y = date.getFullYear();
         var m = date.getMonth()+1;
         var d = date.getDate();
+        //var day = '일월화수목금토'.substr(date.getDay(), 1);
         var day = '일월화수목금토'.substr(date.getDay(), 1);
         return y+'년 '+m+'월 '+d+'일 '+day+'요일';        
     }
@@ -102,14 +105,17 @@
         }*/
         function countDown(연, 월, 일, 시){
             var 날짜, 현재, 남은밀리초, 남은시, 남은분, 남은초;
-            날짜 = new Date(연,월,일,시);
+            날짜 = new Date(연,월-1,일,시);
             현재 = new Date();
-            남은밀리초 =  날짜-현재;
+            남은밀리초 =  날짜.getTime()-현재.getTime();
             남은초 = Math.floor((남은밀리초/1000) % 60);
+            //남은초 = Math.floor(남은밀리초/1000);
+            //남은밀리초 %= 1000;
             남은분 = Math.floor((남은밀리초/1000/60) % 60);
             남은시 = Math.floor((남은밀리초/1000/60/60));
             log(남은시+'시간'+남은분+'분'남은초+'초');
             setTimeout(function (){countDown(연, 월, 일, 시);}),1000);
+            //countDouwn만 적었을때 인자값을 넣지않은 상태에서 사용하기 때문에 함수로 호출
         }
         //countDown(2015, 3, 28, 9);
 	</script>
