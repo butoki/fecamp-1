@@ -72,13 +72,13 @@
 		// 복제하여 .stream 목록에 추가하면 된다.
 		// 힌트: 남은 스크롤 높이 = 문서 전체의 높이 - 수직 스크롤 위치 - 창의 높이 <- 이와 같이 구할 수 있다.
         $(document).on('scroll', function(event){
+            event.preventDefault();
             var 문서전체높이 = $(document).height();
             var 창의높이 = $(window).height();
             var 수직스크롤위치 = $(window).scrollTop(); 
             var 남은스크롤높이 = 문서전체높이-수직스크롤위치-창의높이;
             if(남은스크롤높이<100){
-                console.log('넘어갓나');
-                $items.clone().appendTo($items.parent());//복제하여 .stream 목록에 추가하면 된다.
+                $items.clone().fadeIn(1000).appendTo($stream);//복제하여 .stream 목록에 추가하면 된다.
             }
         });
 
